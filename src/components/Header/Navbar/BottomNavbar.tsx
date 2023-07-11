@@ -2,7 +2,7 @@ import React from 'react'
 
 const BottomNavbar = () => {
     return (
-        <div className="bottom-nav flex items-center sticky bg-red">
+        <div className="bottom-nav flex items-center bg-red">
             <div className="container flex items-center px-[24px]">
                 <div className="logo mr-8">
                     <svg

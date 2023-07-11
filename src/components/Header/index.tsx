@@ -4,12 +4,14 @@ import BottomNavbar from './Navbar/BottomNavbar'
 
 const Header = () => {
     return (
-        <div className="header">
-            <div>
+        <>
+            <div className="top-header">
                 <TopNavbar />
             </div>
-            <BottomNavbar />
-        </div>
+            <div className="bottom-headr sticky top-0">
+                <BottomNavbar />
+            </div>
+        </>
     )
 }
 
