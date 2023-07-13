@@ -8,7 +8,7 @@ const Header = () => {
             <div className="top-header">
                 <TopNavbar />
             </div>
-            <div className="bottom-headr sticky top-0">
+            <div className="bottom-headr sticky top-0 z-50">
                 <BottomNavbar />
             </div>
         </>

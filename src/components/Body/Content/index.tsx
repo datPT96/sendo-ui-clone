@@ -1,7 +1,12 @@
 import React from 'react'
+import SortProduct from './SortProduct'
 
 const Contents = () => {
-    return <div>Contents</div>
+    return (
+        <div>
+            <SortProduct />
+        </div>
+    )
 }
 
 export default Contents

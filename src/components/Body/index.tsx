@@ -11,7 +11,7 @@ const Body = () => {
                     <Breadcrumb />
                     <div className="flex">
                         <Sidebar />
-                        <div>
+                        <div className="flex-1">
                             <Contents />
                         </div>
                     </div>

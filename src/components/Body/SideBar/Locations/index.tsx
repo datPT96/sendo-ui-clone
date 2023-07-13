@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import SideBarSelect from '../SideBarSelect'
-import { locations } from '../../../../data/filterList'
+import { locations } from '@/data/filterList'
 
 const Locations = () => {
     const [open, setOpen] = useState(true)
@@ -11,7 +11,7 @@ const Locations = () => {
     return (
         <div className="flex flex-col w-full px-[0.4rem] py-[1.2rem] text-base">
             <div className="flex items-center justify-between text-base font-bold ">
-                <span className="ml-[1.2rem]">Dia diem</span>
+                <span className="ml-[1.2rem]">Địa điểm</span>
                 <button
                     className="p-[0.7rem] hover:bg-gray rounded-[0.4rem]"
                     onClick={() => handleClick()}
@@ -22,7 +22,7 @@ const Locations = () => {
                         viewBox="0 0 24 24"
                         xmlns="http://www.w3.org/2000/svg"
                         version="1.1"
-                        className={`w-[1.6rem] ${open ? 'rotate-180' : ''}`}
+                        className={`w-[1.6rem] ${open ? '' : 'rotate-180'}`}
                     >
                         <path
                             fill="#6F787E"
@@ -32,7 +32,7 @@ const Locations = () => {
                     </svg>
                 </button>
             </div>
-            <SideBarSelect datas={locations} />
+            {open && <SideBarSelect datas={locations} />}
             <hr></hr>
         </div>
     )

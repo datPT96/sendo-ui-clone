@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
 
-import MultiLevelMenus from './MultiLevelMenus'
-import categoriesList from '@/data/categoriesList'
+import { level_price } from '@/data/filterList'
+import LevelFilter from './LevelFilter'
+import PriceRangeList from './PriceRangeList'
 
-const Category = () => {
+const LevelPrice = () => {
     const [open, setOpen] = useState(true)
 
     const handleClick = () => {
@@ -13,7 +13,7 @@ const Category = () => {
     return (
         <div className="flex flex-col w-full px-[0.4rem] py-[1.2rem] text-base">
             <div className="flex items-center justify-between text-base font-bold ">
-                <span className="ml-[1.2rem]">Danh mục</span>
+                <span className="ml-[1.2rem]">Khoảng giá</span>
                 <button
                     className="p-[0.7rem] hover:bg-gray rounded-[0.4rem]"
                     onClick={() => handleClick()}
@@ -34,15 +34,14 @@ const Category = () => {
                     </svg>
                 </button>
             </div>
-            <div className={`${open ? '' : 'hidden'}`}>
-                <Link to={'/'} className="text-blue px-[0.8rem] py-[1.2rem]">
-                    Về trang tất cả danh mục
-                </Link>
-                <MultiLevelMenus datas={categoriesList} />
-            </div>
+            {open && (
+                <div className="px-[1.2rem]">
+                    <LevelFilter />
+                    <PriceRangeList datas={level_price} />
+                </div>
+            )}
             <hr></hr>
         </div>
     )
 }
-
-export default Category
+export default LevelPrice
