@@ -5,9 +5,9 @@ import Contents from './Content'
 
 const Body = () => {
     return (
-        <main>
-            <div className="bg-gray min-h-screen w-full">
-                <div className="container px-[24px]">
+        <main className="relative">
+            <div className="bg-gray min-h-screen w-full pb-[2.4rem]">
+                <div className="container px-[24px] mb-[8px]">
                     <Breadcrumb />
                     <div className="flex">
                         <Sidebar />

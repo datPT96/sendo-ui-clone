@@ -32,47 +32,49 @@ const selectType = [
 
 const Options = styled(MenuItem)(({ theme }) => ({
     justifyContent: 'space-between',
+    fontSize: 14,
     '& .MuiSvgIcon-root': {
-        marginRight: theme.spacing(1),
+        color: '#ee2624',
+        marginRight: theme.spacing(0),
+        fontSize: 24,
     },
 }))
 
 const SortProduct = () => {
-    const [option, setOption] = useState('de-cu')
+    const [option, setOption] = useState('Đề cử')
 
     const onSelectChange = (e: SelectChangeEvent) => {
-        e.preventDefault()
         setOption(e.target.value as string)
     }
 
     return (
-        <Box sx={{ minWidth: 120, display: 'flex', alignItems: 'center' }}>
+        <div className="flex items-center">
             <Typography fontSize={14}>Sắp xếp theo:</Typography>
             <Select
                 size="small"
                 sx={{
                     marginLeft: '8px',
                     '& .MuiInputBase-input': {
+                        display: 'flex',
+                        alignItems: 'center',
                         minWidth: 120,
-                        fontSize: 12,
+                        fontSize: 14,
                     },
                 }}
                 IconComponent={KeyboardArrowDownIcon}
                 value={option}
                 onChange={onSelectChange}
+                displayEmpty
+                renderValue={() => <Box>{option}</Box>}
             >
                 {selectType.map((item, index) => (
-                    <Options
-                        key={index}
-                        value={item.value}
-                        sx={{ fontSize: 12 }}
-                    >
-                        {item.label}
-                        {option === item.value ? <CheckIcon /> : ''}
+                    <Options key={index} value={item.label}>
+                        <span>{item.label}</span>
+                        {option === item.label ? <CheckIcon /> : ''}
                     </Options>
                 ))}
             </Select>
-        </Box>
+        </div>
     )
 }
 

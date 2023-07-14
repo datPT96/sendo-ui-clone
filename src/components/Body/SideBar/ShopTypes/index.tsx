@@ -11,7 +11,7 @@ const ShopTypes = () => {
     }
     return (
         <div className="flex flex-col w-full px-[0.4rem] py-[1.2rem] text-base">
-            <div className="flex items-center justify-between text-base font-bold ">
+            <div className="flex items-center justify-between text-base font-bold">
                 <span className="ml-[1.2rem]">Loại shop</span>
                 <button
                     className="p-[0.7rem] hover:bg-gray rounded-[0.4rem]"

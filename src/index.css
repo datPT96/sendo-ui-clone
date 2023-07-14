@@ -27,9 +27,30 @@
     input[type='number'] {
         font-size: 14px !important;
     }
-
     input[type='number']::-webkit-inner-spin-button {
         -webkit-appearance: none;
         margin: 0;
+    }
+    .overflow-text {
+        @apply overflow-hidden text-ellipsis whitespace-nowrap;
+    }
+
+    .product-name {
+        @apply block;
+    }
+    .price-discout {
+        @apply text-[11px] text-[#b7bbbf] line-through leading-[1.2rem] tracking-normal;
+    }
+    .discount-percent {
+        @apply text-sm text-red leading-[1.6rem] tracking-normal;
+    }
+    .final-price {
+        @apply text-red text-[16px] font-bold tracking-normal leading-9;
+    }
+    .paylate {
+        @apply flex items-center text-[11px] text-[#3F4B53] bg-gray;
+    }
+    .final-rating {
+        @apply leading-[1.2rem] tracking-normal text-black;
     }
 }

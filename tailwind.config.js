@@ -12,7 +12,7 @@ module.exports = {
             blue: '#0f62fe',
         },
         screens: {
-            sm: '768px',
+            sm: '1025px',
             lg: '1272px',
             '2xl': '1356px',
         },
