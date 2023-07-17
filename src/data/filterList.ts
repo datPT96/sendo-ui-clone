@@ -38,6 +38,14 @@ export const locations = [
     {
         "option_id": 15,
         "option_name": "Cần Thơ"
+    },
+    {
+        "option_id": 3,
+        "option_name": "Hưng Yên"
+    },
+    {
+        "option_id": 4,
+        "option_name": "Kháng Hòa"
     }
 ]
 
