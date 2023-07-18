@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ChangeEvent } from 'react'
 import Category from './Categories/Category'
 import Locations from './Locations'
 import ShippingMethod from './ShippingMethod'

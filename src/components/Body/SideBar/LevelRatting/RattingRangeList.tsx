@@ -1,9 +1,10 @@
 import { Button } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
 import RemoveIcon from '@mui/icons-material/Remove'
-import React, { useState } from 'react'
+import React, { useState, useContext, MouseEvent, useEffect } from 'react'
 
 import { LevelRatting } from '@/data/type'
+import { ProductContext } from '@/contexts/ProductContext'
 
 interface RattingProps {
     datas: LevelRatting[]
@@ -11,10 +12,22 @@ interface RattingProps {
 
 const RattingRangeList = ({ datas }: RattingProps) => {
     const [open, setOpen] = useState(false)
+    const [key, setKey] = useState<string>('')
+
+    const { filterByStar } = useContext(ProductContext)
 
     const hanldeClick = () => {
         setOpen(!open)
     }
+
+    console.log(key)
+    const onClick = (e: MouseEvent<HTMLSpanElement>) => {
+        setKey(e.currentTarget.title)
+    }
+
+    useEffect(() => {
+        filterByStar(key)
+    }, [key])
 
     return (
         <div className="flex flex-col ml-[0.8rem] items-stretch">
@@ -26,6 +39,14 @@ const RattingRangeList = ({ datas }: RattingProps) => {
                       return (
                           <span
                               key={index}
+                              onClick={onClick}
+                              title={`${
+                                  item.gte_rating_percent !== ''
+                                      ? item.gte_rating_percent
+                                      : item.lte_rating_percent !== ''
+                                      ? item.lte_rating_percent
+                                      : ''
+                              }`}
                               className="bg-gray hover:font-bold cursor-pointer rounded-[0.4rem] px-[0.8rem] py-[0.6rem] mb-[0.8rem]"
                           >
                               {item.option_name}
@@ -37,6 +58,7 @@ const RattingRangeList = ({ datas }: RattingProps) => {
                           <span
                               key={index}
                               className="bg-gray hover:font-bold cursor-pointer rounded-[0.4rem] px-[0.8rem] py-[0.6rem] mb-[0.8rem]"
+                              onClick={onClick}
                           >
                               {item.option_name}
                           </span>

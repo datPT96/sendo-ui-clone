@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import {
     Box,
     Card,
@@ -11,6 +11,11 @@ import LinearProgress, {
     linearProgressClasses,
 } from '@mui/material/LinearProgress'
 import { styled } from '@mui/material/styles'
+import { Product } from '@/reducers/ProductReducer'
+
+interface ProductCardProp {
+    product: Product
+}
 
 const CardWrapper = styled(Card)({
     borderRadius: '8px',
@@ -50,7 +55,7 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
     },
 }))
 
-const ProductCard = ({ product }: any) => {
+const ProductCard = ({ product }: ProductCardProp) => {
     let percent = 0
     let progressbar = false
     if (product.item?.quantity && product.item?.remaining) {
@@ -64,35 +69,31 @@ const ProductCard = ({ product }: any) => {
             <CardMedia component={'img'} image={product?.item?.thumbnail_url} />
             <Contents>
                 <div className="flex w-full absolute top-0 left-0 translate-y-[-50%]">
-                    {product?.item?.event_banners?.map(
-                        (img: any, index: number) => {
-                            return (
-                                <img
-                                    key={index}
-                                    src={img?.image}
-                                    alt=""
-                                    className="max-w-[48%] h-[1.6rem]"
-                                />
-                            )
-                        },
-                    )}
+                    {product?.item?.event_banners?.map((img, index) => {
+                        return (
+                            <img
+                                key={index}
+                                src={img?.image}
+                                alt=""
+                                className="max-w-[48%] h-[1.6rem]"
+                            />
+                        )
+                    })}
                 </div>
                 <span className="text-base mb-[0.4rem] h-[3.6rem] block overflow-text">
-                    {product?.item?.shop_badge_urls?.map(
-                        (item: any, index: number) => {
-                            return (
-                                <img
-                                    key={index}
-                                    src={item.icon_url}
-                                    alt=""
-                                    className="h-[1.2rem] mr-[0.4rem] inline-block"
-                                />
-                            )
-                        },
-                    )}
+                    {product?.item?.shop_badge_urls?.map((item, index) => {
+                        return (
+                            <img
+                                key={index}
+                                src={item.icon_url}
+                                alt=""
+                                className="h-[1.2rem] mr-[0.4rem] inline-block"
+                            />
+                        )
+                    })}
                     {product?.item?.name}
                 </span>
-                <div className="flex flex-col items-stretch w-full h-[1.6rem]">
+                <div className="flex flex-col items-stretch w-full">
                     <div className="flex items-baseline w-full">
                         <span className="price-discout">
                             {product?.item?.original_price}

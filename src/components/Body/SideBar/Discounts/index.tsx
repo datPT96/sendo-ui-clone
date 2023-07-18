@@ -1,7 +1,14 @@
-import React, { useState } from 'react'
+import React, {
+    useState,
+    ChangeEvent,
+    useCallback,
+    useEffect,
+    useContext,
+} from 'react'
 
 import SideBarSelect from '../SideBarSelect'
 import { discounts } from '@/data/filterList'
+import { ActionContext } from '@/contexts/ActionContext'
 
 const Discounts = () => {
     const [open, setOpen] = useState(true)
@@ -9,6 +16,33 @@ const Discounts = () => {
     const handleClick = () => {
         setOpen(!open)
     }
+
+    const { actions, addAction } = useContext(ActionContext)
+
+    const [checkedItem, setCheckedItem] = useState<string[]>([])
+
+    const handleCheck = useCallback(
+        (e: ChangeEvent<HTMLInputElement>) => {
+            let newCheckedItem: string[] = [...checkedItem]
+            let value = e.target.value
+            console.log(value)
+            if (newCheckedItem.includes(value)) {
+                var index = newCheckedItem.indexOf(value)
+                if (index > -1) {
+                    newCheckedItem.splice(index, 1)
+                }
+            } else {
+                newCheckedItem.push(value)
+            }
+            setCheckedItem(newCheckedItem)
+        },
+        [checkedItem],
+    )
+
+    useEffect(() => {
+        addAction('promo', checkedItem)
+    }, [checkedItem])
+
     return (
         <div className="flex flex-col w-full px-[0.4rem] py-[1.2rem] text-base">
             <div className="flex items-center justify-between text-base font-bold ">
@@ -33,7 +67,7 @@ const Discounts = () => {
                     </svg>
                 </button>
             </div>
-            {open && <SideBarSelect datas={discounts} />}
+            {open && <SideBarSelect datas={discounts} onClick={handleCheck} />}
             <hr></hr>
         </div>
     )

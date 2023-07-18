@@ -1,7 +1,14 @@
-import React, { useState } from 'react'
+import React, {
+    useState,
+    ChangeEvent,
+    useCallback,
+    useContext,
+    useEffect,
+} from 'react'
 
 import { other_filter } from '@/data/filterList'
 import SideBarSelect from '../SideBarSelect'
+import { ActionContext } from '@/contexts/ActionContext'
 
 const OtherFilter = () => {
     const [open, setOpen] = useState(true)
@@ -9,6 +16,33 @@ const OtherFilter = () => {
     const handleClick = () => {
         setOpen(!open)
     }
+
+    const { actions, addAction } = useContext(ActionContext)
+
+    const [checkedItem, setCheckedItem] = useState<string[]>([])
+
+    const handleCheck = useCallback(
+        (e: ChangeEvent<HTMLInputElement>) => {
+            let newCheckedItem: string[] = [...checkedItem]
+            let value = e.target.value
+            console.log(value)
+            if (newCheckedItem.includes(value)) {
+                var index = newCheckedItem.indexOf(value)
+                if (index > -1) {
+                    newCheckedItem.splice(index, 1)
+                }
+            } else {
+                newCheckedItem.push(value)
+            }
+            setCheckedItem(newCheckedItem)
+        },
+        [checkedItem],
+    )
+
+    useEffect(() => {
+        addAction('other', checkedItem)
+    }, [checkedItem])
+
     return (
         <div className="flex flex-col w-full px-[0.4rem] py-[1.2rem] text-base">
             <div className="flex items-center justify-between text-base font-bold ">
@@ -33,7 +67,9 @@ const OtherFilter = () => {
                     </svg>
                 </button>
             </div>
-            {open && <SideBarSelect datas={other_filter} />}
+            {open && (
+                <SideBarSelect datas={other_filter} onClick={handleCheck} />
+            )}
         </div>
     )
 }

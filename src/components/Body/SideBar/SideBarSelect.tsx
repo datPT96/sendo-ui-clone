@@ -1,3 +1,4 @@
+import ActionContextProvider, { ActionContext } from '@/contexts/ActionContext'
 import { Discounts, Locations, ShippingMethod, otherFilter } from '@/data/type'
 import {
     FormControlLabel,
@@ -11,6 +12,7 @@ import React, { useState, ChangeEvent } from 'react'
 
 interface SideBarSelectType {
     datas: Locations[] | ShippingMethod[] | Discounts[] | otherFilter[]
+    onClick: (e: ChangeEvent<HTMLInputElement>) => void
 }
 
 // const BoxIcon = styled('span')(({ theme }) => ({
@@ -33,29 +35,13 @@ interface SideBarSelectType {
 //     },
 // })
 
-const SideBarSelect = ({ datas }: SideBarSelectType) => {
+const SideBarSelect = ({ datas, onClick }: SideBarSelectType) => {
     const [open, setOpen] = useState(false)
-    const [checkedItem, setCheckedItem] = useState<string[]>([])
 
+    const onCheck = onClick
     const handleClick = () => {
         setOpen(!open)
     }
-
-    const handleCheck = (e: ChangeEvent<HTMLInputElement>) => {
-        let newCheckedItem: string[] = [...checkedItem]
-        let value = e.target.value
-        console.log(value)
-        if (newCheckedItem.includes(value)) {
-            var index = newCheckedItem.indexOf(value)
-            if (index > -1) {
-                newCheckedItem.splice(index, 1)
-            }
-        } else {
-            newCheckedItem.push(value)
-        }
-        setCheckedItem(newCheckedItem)
-    }
-    console.log(checkedItem)
 
     return (
         <FormGroup>
@@ -83,7 +69,7 @@ const SideBarSelect = ({ datas }: SideBarSelectType) => {
                                           },
                                       }}
                                       disableRipple
-                                      onChange={handleCheck}
+                                      onChange={onCheck}
                                   />
                               }
                               label={
@@ -112,64 +98,55 @@ const SideBarSelect = ({ datas }: SideBarSelectType) => {
                           />
                       )
                   })
-                : datas.map(
-                      (
-                          item:
-                              | Locations
-                              | ShippingMethod
-                              | Discounts
-                              | otherFilter,
-                          index,
-                      ) => {
-                          return (
-                              <FormControlLabel
-                                  key={index}
-                                  control={
-                                      <Checkbox
-                                          value={item.option_name}
-                                          sx={{
-                                              '&.MuiButtonBase-root': {
-                                                  padding: 0,
-                                              },
-                                              '& .MuiSvgIcon-root': {
-                                                  fontSize: 22,
-                                              },
-                                              color: '#6f787e',
-                                              '&.Mui-checked': {
-                                                  color: red[600],
-                                              },
-                                          }}
-                                          disableRipple
-                                          onChange={handleCheck}
-                                      />
-                                  }
-                                  label={
-                                      <Typography
-                                          variant="caption"
-                                          fontSize={14}
-                                          noWrap={true}
-                                          align="center"
-                                      >
-                                          {item.option_name}
-                                      </Typography>
-                                  }
-                                  sx={{
-                                      '&.MuiFormControlLabel-root': {
-                                          width: '100%',
-                                          marginLeft: 0.8,
-                                          marginRight: 0,
-                                          borderRadius: 0.8,
-                                          padding: '4px 8px',
-                                      },
-                                      '&:hover': {
-                                          backgroundColor: '#f2f3f4',
-                                          fontWeight: 'bold',
-                                      },
-                                  }}
-                              />
-                          )
-                      },
-                  )}
+                : datas.map((item: any, index) => {
+                      return (
+                          <FormControlLabel
+                              key={index}
+                              control={
+                                  <Checkbox
+                                      value={item?.search_key}
+                                      sx={{
+                                          '&.MuiButtonBase-root': {
+                                              padding: 0,
+                                          },
+                                          '& .MuiSvgIcon-root': {
+                                              fontSize: 22,
+                                          },
+                                          color: '#6f787e',
+                                          '&.Mui-checked': {
+                                              color: red[600],
+                                          },
+                                      }}
+                                      disableRipple
+                                      onChange={onCheck}
+                                  />
+                              }
+                              label={
+                                  <Typography
+                                      variant="caption"
+                                      fontSize={14}
+                                      noWrap={true}
+                                      align="center"
+                                  >
+                                      {item.option_name}
+                                  </Typography>
+                              }
+                              sx={{
+                                  '&.MuiFormControlLabel-root': {
+                                      width: '100%',
+                                      marginLeft: 0.8,
+                                      marginRight: 0,
+                                      borderRadius: 0.8,
+                                      padding: '4px 8px',
+                                  },
+                                  '&:hover': {
+                                      backgroundColor: '#f2f3f4',
+                                      fontWeight: 'bold',
+                                  },
+                              }}
+                          />
+                      )
+                  })}
             {datas.length > 4 && (
                 <button
                     onClick={handleClick}

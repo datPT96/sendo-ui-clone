@@ -1,51 +1,63 @@
 export const locations = [
     {
         "option_id": 2,
-        "option_name": "Hà Nội"
+        "option_name": "Hà Nội",
+        "search_key": 2
     },
     {
         "option_id": 1,
-        "option_name": "Hồ Chí Minh"
+        "option_name": "Hồ Chí Minh",
+        "search_key": 1
     },
     {
         "option_id": 18,
-        "option_name": "Đắk Lắk"
+        "option_name": "Đắk Lắk",
+        "search_key": 18
     },
     {
         "option_id": 61,
-        "option_name": "Bình Dương"
+        "option_name": "Bình Dương",
+        "search_key": 61
     },
     {
         "option_id": 17,
-        "option_name": "Đà Nẵng"
+        "option_name": "Đà Nẵng",
+        "search_key": 17
     },
     {
         "option_id": 35,
-        "option_name": "Lào Cai"
+        "option_name": "Lào Cai",
+        "search_key": 35
     },
     {
         "option_id": 33,
-        "option_name": "Lâm Đồng"
+        "option_name": "Lâm Đồng",
+        "search_key": 33
     },
     {
         "option_id": 40,
-        "option_name": "Phú Thọ"
+        "option_name": "Phú Thọ",
+        "search_key": 40
     },
     {
         "option_id": 23,
-        "option_name": "Hà Nam"
+        "option_name": "Hà Nam",
+        "search_key": 23
     },
     {
         "option_id": 15,
-        "option_name": "Cần Thơ"
+        "option_name": "Cần Thơ",
+        "search_key": 15
     },
     {
         "option_id": 3,
-        "option_name": "Hưng Yên"
+        "option_name": "Hưng Yên",
+        "search_key": 3
     },
     {
         "option_id": 4,
-        "option_name": "Kháng Hòa"
+        "option_name": "Kháng Hòa",
+        "search_key": 4
     }
 ]
 
@@ -70,7 +82,7 @@ export const ship_method = [
 export const shop_types = [
     {
         "option_name": "SenMall",
-        "search_key": "shop_type",
+        "search_key": "is_senmall",
         "value": 2
     },
     {
@@ -95,56 +107,55 @@ export const discounts = [
         "option_name": "BACK TO SCHOOL",
         "value": 187,
         "label": "BACK TO SCHOOL",
+        'search_key': 'is_in_promotion'
     },
     {
         "option_name": "SĂN SALE SHOP+ (01/07-31/07)",
         "value": 183,
         "label": "SĂN SALE SHOP+ (01/07-31/07)",
+        'search_key': 'is_in_promotion'
     },
     {
         "option_name": "Flash Sale",
         "value": 1,
         "label": "Flash Sale",
+        'search_key': 'in_flash_sale'
     },
     {
         "option_name": "Siêu voucher tháng",
         "value": 1,
         "label": "Siêu voucher tháng",
+        'search_key': 'mega_voucher'
     },
     {
         "option_name": "Mua trước trả sau",
         "value": 1,
         "label": "Mua trước trả sau",
-    },
-    {
-        "option_name": "Mua gói siêu hời",
-        "value": 1,
-        "label": "Mua gói siêu hời",
-    },
-    {
-        "option_name": "Mua nhiều giảm giá",
-        "value": 1,
-        "label": "Mua nhiều giảm giá",
+        'search_key': 'pay_late'
     },
     {
         "option_name": "Freeship",
         "value": 1,
         "label": "Freeship",
+        'search_key': 'free_ship'
     },
     {
         "option_name": "Khuyến mãi",
         "value": 1,
         "label": "Khuyến mãi",
+        'search_key': 'promotion_percentage'
     },
     {
         "option_name": "Khuyến mãi app",
         "value": 1,
         "label": "Khuyến mãi app",
+        'search_key': 'app_discount_percentage'
     },
     {
         "option_name": "Trả góp 0%",
         "value": 1,
         "label": "Trả góp 0%",
+        'search_key': 'pay_late'
     },
 ]
 

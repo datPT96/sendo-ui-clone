@@ -1,6 +1,19 @@
-import React from 'react'
+import React, { useContext, useState, ChangeEvent } from 'react'
+
+import { ProductContext } from '@/contexts/ProductContext'
 
 const BottomNavbar = () => {
+    const [key, setKey] = useState<string>('')
+    const { findProduct } = useContext(ProductContext)
+
+    const onInput = (e: ChangeEvent<HTMLInputElement>) => {
+        setKey(e?.currentTarget?.value)
+    }
+
+    const onClickSearch = () => {
+        findProduct(key)
+    }
+
     return (
         <div className="bottom-nav flex items-center bg-red">
             <div className="container flex items-center px-[24px]">
@@ -39,6 +52,8 @@ const BottomNavbar = () => {
                                 type="text"
                                 className="text-search w-full flex-1"
                                 placeholder="Tìm trên sendo"
+                                value={key}
+                                onInput={onInput}
                             />
                             <div className="search-option flex items-center bg-[#f2f3f4] flex-2">
                                 <input
@@ -65,7 +80,7 @@ const BottomNavbar = () => {
                             </div>
                         </div>
                         <div className="btn-seacrh flex items-center bg-white p-[7px]">
-                            <button>
+                            <button onClick={onClickSearch}>
                                 <svg
                                     width="24"
                                     height="24"

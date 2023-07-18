@@ -1,9 +1,19 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
+
 import Breadcrumb from './Breadcrumb'
 import Sidebar from './SideBar'
 import Contents from './Content'
+import { ProductContext } from '@/contexts/ProductContext'
+import { ActionContext } from '@/contexts/ActionContext'
 
 const Body = () => {
+    const { products, filterProduct } = useContext(ProductContext)
+    const { actions } = useContext(ActionContext)
+    // console.log(actions)
+    useEffect(() => {
+        filterProduct(actions)
+    }, [actions])
+
     return (
         <main className="relative">
             <div className="bg-gray min-h-screen w-full pb-[2.4rem]">
@@ -12,7 +22,7 @@ const Body = () => {
                     <div className="flex">
                         <Sidebar />
                         <div className="flex-1">
-                            <Contents />
+                            <Contents productList={products} />
                         </div>
                     </div>
                 </div>

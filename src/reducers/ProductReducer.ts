@@ -1,6 +1,6 @@
 import { FilterActionType } from './type'
 
-interface Product {
+export interface Product {
     index: number
     type: string
     original_type?: string
@@ -24,6 +24,8 @@ interface Product {
         min_price?: string
         price_range?: string
         original_price?: string
+        rating_percent?: number
+        total_rating?: number
         promotion_sub_message?: {
             type?: string
             text?: string
@@ -43,8 +45,12 @@ interface Product {
         is_shipping_supported?: boolean
         is_empty?: boolean
         has_video?: boolean
+        is_senmall?: boolean
         is_shop_plus?: boolean
+        is_self_shipping?: boolean
+        is_certified?: boolean
         is_in_promotion?: boolean
+        in_flash_sale?: boolean
         img_highlight_urls?:
         {
             type: string
@@ -66,15 +72,20 @@ interface Product {
 
 export type ProductState = Product[]
 
-const { GET_FILTER_PRODUCT } = FilterActionType
+const { GET_FILTER_PRODUCT, GET_SEARCHED_PRODUCT, GET_PRODUCT_STAR } = FilterActionType
+
 type FilterAction = {
-    type: typeof GET_FILTER_PRODUCT
+    type: FilterActionType
     payload: Product[]
 }
 
 const filterReducer = (state: ProductState, action: FilterAction) => {
     switch (action.type) {
         case GET_FILTER_PRODUCT:
+            return action.payload
+        case GET_SEARCHED_PRODUCT:
+            return action.payload
+        case GET_PRODUCT_STAR:
             return action.payload
         default:
             return state
