@@ -14,7 +14,7 @@ interface ProductContextDefault {
     filterProduct: (action: Action) => void
     findProduct: (key: string) => void
     filterByStar: (key: string) => void
-    filterByPrice: (key: string) => void
+    filterByPrice: (min?: string | number, max?: string | number) => void
 }
 
 const {
@@ -49,10 +49,30 @@ const ProductContextProvider = ({ children }: ProductContextProps) => {
         })
     }
 
-    const filterByPrice = (key: string) => {
+    const filterByPrice = (min?: string | number, max?: string | number) => {
+        let productList: ProductState = []
+
+        productList = productsData.filter((product) => {
+            if (min && max === '' && product.item?.final_price) {
+                console.log(min)
+                return product.item?.final_price <= Number(min)
+            }
+            if (min === '' && max && product.item?.max_final_price) {
+                console.log(max)
+                return product.item?.max_final_price > Number(max)
+            }
+            return (
+                product.item?.final_price &&
+                product.item?.max_final_price &&
+                product.item.final_price >= Number(min) &&
+                product.item?.max_final_price <= Number(max)
+            )
+        })
+
+        console.log(productList)
         dispatch({
             type: GET_PRODUCT_PRICE,
-            payload: [...products],
+            payload: [...productList],
         })
     }
 
@@ -244,18 +264,3 @@ const ProductContextProvider = ({ children }: ProductContextProps) => {
 }
 
 export default ProductContextProvider
-
-function filterByPrice(key: string, price: number) {
-    switch (key) {
-        case '90':
-            return price < 90000
-        case '90-550':
-            return price > 90000 || price < 550000
-        case '550-1500':
-            return price > 550000 || price < 1500000
-        case '1500-3000':
-            return price > 1500000 || price < 3000000
-        default:
-            return price
-    }
-}

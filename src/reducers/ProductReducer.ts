@@ -72,7 +72,7 @@ export interface Product {
 
 export type ProductState = Product[]
 
-const { GET_FILTER_PRODUCT, GET_SEARCHED_PRODUCT, GET_PRODUCT_STAR } = FilterActionType
+const { GET_FILTER_PRODUCT, GET_SEARCHED_PRODUCT, GET_PRODUCT_STAR, GET_PRODUCT_PRICE } = FilterActionType
 
 type FilterAction = {
     type: FilterActionType
@@ -86,6 +86,8 @@ const filterReducer = (state: ProductState, action: FilterAction) => {
         case GET_SEARCHED_PRODUCT:
             return action.payload
         case GET_PRODUCT_STAR:
+            return action.payload
+        case GET_PRODUCT_PRICE:
             return action.payload
         default:
             return state

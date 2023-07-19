@@ -161,7 +161,7 @@ export const discounts = [
 
 export const level_price = [
     {
-        "gtprice": -1,
+        "gtprice": "-1",
         "ltprice": "90000"
     },
     {
@@ -182,7 +182,7 @@ export const level_price = [
     },
     {
         "gtprice": "5000000",
-        "ltprice": -1
+        "ltprice": "-1"
     }
 ]
 

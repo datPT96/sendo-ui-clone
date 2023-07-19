@@ -1,17 +1,21 @@
 import { Button, TextField } from '@mui/material'
-import React, { useState } from 'react'
+import React, { ChangeEvent } from 'react'
 
-const LevelFilter = () => {
-    const [gtprice, setGtprice] = useState()
-    const [ltprice, setLtprice] = useState()
+interface LevelFilterProp {
+    gtprice?: string
+    ltprice?: string
+    onClick: () => void
+    onLtpriceChange: (e: ChangeEvent<HTMLInputElement>) => void
+    onGtpriceChange: (e: ChangeEvent<HTMLInputElement>) => void
+}
 
-    const onGtpriceChange = (e: any) => {
-        setGtprice(e.target.value)
-    }
-
-    const onLtpriceChange = (e: any) => {
-        setLtprice(e.target.value)
-    }
+const LevelFilter = ({
+    gtprice,
+    ltprice,
+    onClick,
+    onLtpriceChange,
+    onGtpriceChange,
+}: LevelFilterProp) => {
     return (
         <div className="flex flex-col py-[0.8rem]">
             <div className="flex gap-2 items-center">
@@ -45,6 +49,7 @@ const LevelFilter = () => {
                 }}
                 disableRipple
                 disabled={gtprice || ltprice ? false : true}
+                onClick={onClick}
             >
                 Áp dụng
             </Button>

@@ -1,12 +1,28 @@
-import React, { useState } from 'react'
+import React, { useState, useContext, ChangeEvent } from 'react'
 
 import { level_price } from '@/data/filterList'
 import LevelFilter from './LevelFilter'
 import PriceRangeList from './PriceRangeList'
+import { ProductContext } from '@/contexts/ProductContext'
 
 const LevelPrice = () => {
     const [open, setOpen] = useState(true)
 
+    const [gtprice, setGtprice] = useState('')
+    const [ltprice, setLtprice] = useState('')
+
+    const { filterByPrice } = useContext(ProductContext)
+    const onGtpriceChange = (e: ChangeEvent<HTMLInputElement>) => {
+        setGtprice(e.target.value)
+    }
+
+    const onLtpriceChange = (e: ChangeEvent<HTMLInputElement>) => {
+        setLtprice(e.target.value)
+    }
+
+    const onClickApply = () => {
+        filterByPrice(gtprice, ltprice)
+    }
     const handleClick = () => {
         setOpen(!open)
     }
@@ -36,8 +52,18 @@ const LevelPrice = () => {
             </div>
             {open && (
                 <div className="px-[1.2rem]">
-                    <LevelFilter />
-                    <PriceRangeList datas={level_price} />
+                    <LevelFilter
+                        gtprice={gtprice}
+                        ltprice={ltprice}
+                        onClick={onClickApply}
+                        onGtpriceChange={onGtpriceChange}
+                        onLtpriceChange={onLtpriceChange}
+                    />
+                    <PriceRangeList
+                        datas={level_price}
+                        setGtprice={setGtprice}
+                        setLtprice={setLtprice}
+                    />
                 </div>
             )}
             <hr></hr>
