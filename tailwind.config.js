@@ -2,7 +2,14 @@
 module.exports = {
     content: ['./src/**/*.{js,jsx,ts,tsx}'],
     theme: {
-        extend: {},
+        extend: {
+            maxWidth: {
+                '1/2': '50%',
+                '1/12': '8.333333%',
+                '2/12': '16.666667%',
+                '5/12': '41.666667%',
+            },
+        },
         colors: {
             topRed: '#d52220',
             red: '#ee2624',

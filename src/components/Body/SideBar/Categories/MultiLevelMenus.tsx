@@ -56,20 +56,20 @@ const MultiLevelMenus = ({ datas }: MultiLevelMenusType) => {
         return (
             <li className="cursor-pointer">
                 <div
-                    className={`flex items-center hover:bg-gray hover:font-bold px-[0.8rem] py-[0.4rem] rounded-[0.4rem]`}
+                    className={`flex items-center w-full hover:bg-gray hover:font-bold px-[0.8rem] py-[0.4rem] rounded-[0.4rem]`}
                 >
-                    {hasSubCategory && (
-                        <button
-                            className="p-[0.5rem] bg-white hover:bg-gray rounded-[0.4rem]"
-                            onClick={() => handleExpandBtn(label)}
-                        >
+                    <button
+                        className="p-[0.5rem] bg-white hover:bg-gray rounded-[0.4rem]"
+                        onClick={() => handleExpandBtn(label)}
+                    >
+                        {hasSubCategory && (
                             <svg
                                 width="24"
                                 height="24"
                                 viewBox="0 0 24 24"
                                 xmlns="http://www.w3.org/2000/svg"
                                 version="1.1"
-                                className={`w-[1.2rem] h-[1.2rem] ${
+                                className={`w-[1.4rem] h-[1.4rem] ${
                                     activeMenu.includes(label)
                                         ? 'rotate-180'
                                         : ''
@@ -81,8 +81,8 @@ const MultiLevelMenus = ({ datas }: MultiLevelMenusType) => {
                                     d="M12 10.786 6.476 16 5 14.607 12 8l7 6.607L17.524 16z"
                                 ></path>
                             </svg>
-                        </button>
-                    )}
+                        )}
+                    </button>
                     <span
                         className={`truncate flex-1 ml-[0.4rem] ${
                             activeMenu.includes(label) ? 'font-bold' : ''
@@ -115,7 +115,7 @@ const MultiLevelMenus = ({ datas }: MultiLevelMenusType) => {
 
         level = level + 1
         return (
-            <ul className="ml-[3rem]">
+            <ul className="ml-[1.2rem]">
                 {open
                     ? data?.map((menu: Categories, index) => {
                           const labelCategory = `cate-subCate-${level}-${index}-${menuIndex}`

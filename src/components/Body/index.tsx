@@ -19,7 +19,7 @@ const Body = () => {
             <div className="bg-gray min-h-screen w-full pb-[2.4rem]">
                 <div className="container px-[24px] mb-[8px]">
                     <Breadcrumb />
-                    <div className="flex">
+                    <div className="stretch-content min-h-[90vh]">
                         <Sidebar />
                         <div className="flex-1">
                             <Contents productList={products} />

@@ -11,8 +11,8 @@ const Category = () => {
         setOpen(!open)
     }
     return (
-        <div className="flex flex-col w-full px-[0.4rem] py-[1.2rem] text-base">
-            <div className="flex items-center justify-between text-base font-bold ">
+        <div className="stretch-content flex-col px-[0.4rem] py-[1.2rem] text-base">
+            <div className="stretch-content items-center justify-between text-base font-bold ">
                 <span className="ml-[1.2rem]">Danh mục</span>
                 <button
                     className="p-[0.7rem] hover:bg-gray rounded-[0.4rem]"
@@ -24,7 +24,9 @@ const Category = () => {
                         viewBox="0 0 24 24"
                         xmlns="http://www.w3.org/2000/svg"
                         version="1.1"
-                        className={`w-[1.6rem] ${!open ? 'rotate-180' : ''}`}
+                        className={`w-[1.8rem] h-[1.8rem] ${
+                            !open ? 'rotate-180' : ''
+                        }`}
                     >
                         <path
                             fill="#6F787E"
@@ -34,8 +36,14 @@ const Category = () => {
                     </svg>
                 </button>
             </div>
-            <div className={`${open ? '' : 'hidden'}`}>
-                <Link to={'/'} className="text-blue px-[0.8rem] py-[1.2rem]">
+            <div
+                className={`stretch-content categories-css flex-col flex-wrap 
+                ${open ? '' : 'hidden'}`}
+            >
+                <Link
+                    to={'/'}
+                    className="text-blue leading-[1.4rem] px-[1.2rem] py-[0.8rem]"
+                >
                     Về trang tất cả danh mục
                 </Link>
                 <MultiLevelMenus datas={categoriesList} />

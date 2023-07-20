@@ -1,4 +1,3 @@
-import React, { ChangeEvent } from 'react'
 import Category from './Categories/Category'
 import Locations from './Locations'
 import ShippingMethod from './ShippingMethod'
@@ -10,7 +9,7 @@ import OtherFilter from './OtherFilter'
 
 const Sidebar = () => {
     return (
-        <div className="bg-white rounded-[8px] mr-8 max-h-[90vh] min-h-[80vh] w-[20.6rem] overflow-x-hidden overflow-y-auto sticky top-[8rem]">
+        <div className="sidebar-css">
             <div>
                 <Category />
                 <Locations />
