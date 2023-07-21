@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
+import ExpandMoreOrLess from '../ExpandMoreOrLess'
 
 interface Categories {
     id: number
     level: number
     name: string
     url_path: string
+    is_selected?: boolean
     sub_category?: Categories[]
 }
 
@@ -18,6 +20,7 @@ interface ListMenuType {
     hasSubCategory?: Categories[]
     label: string
     index: number
+    isSelected?: boolean
 }
 
 interface SubCategoryType {
@@ -46,20 +49,29 @@ const MultiLevelMenus = ({ datas }: MultiLevelMenusType) => {
         setActiveMenu(newActiveMenus)
     }
 
+    const onClickExpand = () => {
+        setOpen(!open)
+    }
+
     const ListMenu = ({
         level,
         data,
         hasSubCategory,
         label,
         index,
+        isSelected,
     }: ListMenuType) => {
         return (
             <li className="cursor-pointer">
                 <div
-                    className={`flex items-center w-full hover:bg-gray hover:font-bold px-[0.8rem] py-[0.4rem] rounded-[0.4rem]`}
+                    className={`stretch-content items-center hover:bg-gray hover:font-bold px-[0.8rem] py-[0.4rem] rounded-[0.4rem]`}
                 >
                     <button
-                        className="p-[0.5rem] bg-white hover:bg-gray rounded-[0.4rem]"
+                        className={`${
+                            hasSubCategory
+                                ? 'p-[0.5rem] button-main button-base button-content bg-white hover:bg-gray rounded-[0.4rem]'
+                                : 'ml-[2.4rem]'
+                        }`}
                         onClick={() => handleExpandBtn(label)}
                     >
                         {hasSubCategory && (
@@ -69,10 +81,10 @@ const MultiLevelMenus = ({ datas }: MultiLevelMenusType) => {
                                 viewBox="0 0 24 24"
                                 xmlns="http://www.w3.org/2000/svg"
                                 version="1.1"
-                                className={`w-[1.4rem] h-[1.4rem] ${
+                                className={`w-[1.2rem] h-[1.2rem] ${
                                     activeMenu.includes(label)
-                                        ? 'rotate-180'
-                                        : ''
+                                        ? ''
+                                        : 'rotate-180'
                                 }`}
                             >
                                 <path
@@ -84,8 +96,12 @@ const MultiLevelMenus = ({ datas }: MultiLevelMenusType) => {
                         )}
                     </button>
                     <span
-                        className={`truncate flex-1 ml-[0.4rem] ${
-                            activeMenu.includes(label) ? 'font-bold' : ''
+                        className={`truncate ml-[0.4rem] flex-1 ${
+                            hasSubCategory && isSelected ? 'font-bold' : ''
+                        } ${
+                            !hasSubCategory && isSelected
+                                ? 'text-red font-bold'
+                                : ''
                         }`}
                     >
                         {data.name}
@@ -127,13 +143,14 @@ const MultiLevelMenus = ({ datas }: MultiLevelMenusType) => {
                                   hasSubCategory={menu.sub_category}
                                   label={labelCategory}
                                   index={index}
+                                  isSelected={menu.is_selected}
                               />
                           )
                       })
                     : data?.map((menu: Categories, index) => {
                           const labelCategory = `cate-subCate-${level}-${index}-${menuIndex}`
 
-                          if (index > 6) {
+                          if (index >= 6) {
                               return null
                           }
                           return (
@@ -144,6 +161,7 @@ const MultiLevelMenus = ({ datas }: MultiLevelMenusType) => {
                                   hasSubCategory={menu.sub_category}
                                   label={labelCategory}
                                   index={index}
+                                  isSelected={menu.is_selected}
                               />
                           )
                       })}
@@ -165,20 +183,19 @@ const MultiLevelMenus = ({ datas }: MultiLevelMenusType) => {
                             hasSubCategory={item.sub_category}
                             label={label}
                             index={index}
+                            isSelected={item.is_selected}
                         />
                     )
                 })}
             </ul>
-            <div
-                className="flex justify-center cursor-pointer"
-                onClick={() => {
-                    setOpen(!open)
-                }}
-            >
-                <span className="hover:bg-gray font-bold px-[0.8rem] py-[0.4rem] rounded-[0.4rem]">
-                    {open ? '- Thu gọn' : '+ Xem thêm'}
-                </span>
+            <div className="pl-[1.2rem]">
+                <ExpandMoreOrLess isOpen={open} onClick={onClickExpand} />
             </div>
+            {/* {open ? (
+                <ExpandLess onClick={onClickExpand} />
+            ) : (
+                
+            )} */}
         </div>
     )
 }

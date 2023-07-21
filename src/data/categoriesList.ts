@@ -4,6 +4,7 @@ const categoriesList = [
         "level": 2,
         "name": "Nhà Cửa",
         "url_path": "do-dung-trong-nha",
+        'is_selected': true,
         "sub_category": [
             {
                 "id": 1020,
@@ -612,6 +613,7 @@ const categoriesList = [
                 "level": 3,
                 "name": "Nội thất phòng làm việc",
                 "url_path": "do-dung-trong-nha/noi-that-phong-lam-viec",
+                'is_selected': true,
                 "sub_category": [
                     {
                         "id": 2068,

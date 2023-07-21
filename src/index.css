@@ -5,17 +5,17 @@
 
 @layer base {
     * {
-        box-sizing: border-box;
+        @apply box-border;
     }
 
     html {
         font-size: 10px;
+        font-family: inherit;
     }
 
     body {
         margin: 0;
         -webkit-text-size-adjust: 100%;
-        -webkit-tap-highlight-color: transparent;
         font-family: 'Roboto', sans-serif;
         font-size: 1.4rem;
         font-weight: 400;
@@ -27,9 +27,62 @@
     input[type='number'] {
         font-size: 14px !important;
     }
+
     input[type='number']::-webkit-inner-spin-button {
         -webkit-appearance: none;
         margin: 0;
+    }
+
+    input[type='number']:focus {
+        @apply outline-none;
+    }
+
+    .input-base {
+        @apply flex items-stretch text-base overflow-hidden w-full
+        border-[1px] border-solid border-[#cfd2d4] rounded-[0.4rem];
+    }
+
+    .input-base:hover {
+        @apply border-[#3f81fe];
+    }
+
+    .input-base:focus-within {
+        @apply border-[1px] border-solid border-[#3f81fe] relative
+        shadow-[0_0_0_1px_#3f81fe];
+    }
+
+    img,
+    svg {
+        @apply align-middle;
+    }
+
+    svg {
+        @apply overflow-hidden;
+    }
+
+    .button-main {
+        @apply border-none rounded-[.4rem] font-bold outline-0;
+    }
+
+    .button-main:hover {
+        @apply bg-gray border-gray;
+    }
+
+    .button-content {
+        @apply inline-flex items-center justify-center relative 
+        no-underline text-[inherit] border-[0px] rounded-none;
+    }
+
+    .button-base {
+        @apply bg-white border-white border-[1px] border-solid text-[#3f4b53];
+    }
+
+    .expand-icon {
+        @apply fill-[#3f4b53] !important;
+    }
+
+    .button-main .expand-icon {
+        @apply w-[1.6rem] h-[1.6rem];
     }
 
     .stretch-content {
@@ -38,6 +91,14 @@
 
     .overflow-text {
         @apply overflow-hidden text-ellipsis whitespace-nowrap;
+    }
+
+    .srceen-basis-2 {
+        @apply basis-2/12 max-w-2/12 grow-0;
+    }
+
+    .srceen-basis-3 {
+        @apply basis-4/12 max-w-4/12 grow-0;
     }
 }
 
@@ -122,8 +183,11 @@
         @apply bg-[#878e94] rounded-[0.4rem] h-[10.6rem] w-[0.4rem];
     }
 
+    .select-btn {
+        @apply items-center w-full rounded-[0.4rem] pl-[1.2rem] py-[0.4rem] pr-[0.8rem];
+    }
     .categories-css {
-        @apply max-h-[5000vh] overflow-hidden transition-all;
+        @apply max-h-[5000vh] overflow-hidden;
     }
 
     .product-name {
@@ -155,5 +219,8 @@
     .btn-register {
         @apply inline-flex items-center justify-center rounded-[0.4rem] outline-0
          w-full bg-red border-[1px] border-solid border-[#ee2624] text-white px-[1.6rem] py-[0.6rem];
+    }
+    .btn-gotop {
+        @apply h-[4rem] w-[4rem] rounded-[0.4rem] border-[0] bg-white shadow-[0_1px_3px_0_rgba(0,0,0,.2)] fixed;
     }
 }

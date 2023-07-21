@@ -30,7 +30,7 @@ const RattingRangeList = ({ datas }: RattingProps) => {
     }, [key])
 
     return (
-        <div className="flex flex-col ml-[0.8rem] items-stretch">
+        <div className="stretch-content flex-wrap flex-col pt-[0.4rem]">
             {!open
                 ? datas.map((item, index) => {
                       if (index > 3) {
@@ -47,7 +47,7 @@ const RattingRangeList = ({ datas }: RattingProps) => {
                                       ? item.lte_rating_percent
                                       : ''
                               }`}
-                              className="bg-gray hover:font-bold cursor-pointer rounded-[0.4rem] px-[0.8rem] py-[0.6rem] mb-[0.8rem]"
+                              className="stretch-content items-center flex-wrap h-[3.2rem] bg-gray hover:font-bold cursor-pointer rounded-[0.4rem] px-[0.8rem] mb-[0.8rem]"
                           >
                               {item.option_name}
                           </span>
@@ -57,7 +57,7 @@ const RattingRangeList = ({ datas }: RattingProps) => {
                       return (
                           <span
                               key={index}
-                              className="bg-gray hover:font-bold cursor-pointer rounded-[0.4rem] px-[0.8rem] py-[0.6rem] mb-[0.8rem]"
+                              className="stretch-content items-center flex-wrap h-[3.2rem] bg-gray hover:font-bold cursor-pointer rounded-[0.4rem] px-[0.8rem] mb-[0.8rem]"
                               onClick={onClick}
                           >
                               {item.option_name}

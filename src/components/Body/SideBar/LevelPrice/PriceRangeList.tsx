@@ -1,14 +1,19 @@
 import React, { useState, useContext, Dispatch } from 'react'
 import { LevelPrice } from '@/data/type'
-import { Button } from '@mui/material'
-import AddIcon from '@mui/icons-material/Add'
-import RemoveIcon from '@mui/icons-material/Remove'
 import { ProductContext } from '@/contexts/ProductContext'
+import ExpandMoreOrLess from '../ExpandMoreOrLess'
 
 interface LevelPriceSelectType {
     datas: LevelPrice[]
     setGtprice: Dispatch<React.SetStateAction<string>>
     setLtprice: Dispatch<React.SetStateAction<string>>
+}
+
+const convertNumber = (value: number) => {
+    if (value < 1000000) {
+        return `${value / 1000}K`
+    }
+    return `${Math.floor(value / 1000000)}M`
 }
 
 const PriceRangeList = ({
@@ -30,7 +35,7 @@ const PriceRangeList = ({
     }
 
     return (
-        <div className="flex flex-col ml-[0.8rem] items-stretch">
+        <div className="stretch-content flex-col flex-wrap pt-[0.4rem] items-stretch">
             {!open
                 ? datas.map((item: any, index) => {
                       if (index > 3) {
@@ -47,14 +52,16 @@ const PriceRangeList = ({
                                       ? findInRange(item.gtprice, item.ltprice)
                                       : findInRange('', item.gtprice)
                               }}
-                              className="bg-gray hover:font-bold cursor-pointer rounded-[0.4rem] px-[0.8rem] py-[0.6rem] mb-[0.8rem]"
+                              className="stretch-content items-center flex-wrap h-[3.2rem] bg-gray hover:font-bold cursor-pointer rounded-[0.4rem] px-[0.8rem] mb-[0.8rem]"
                           >
                               {item.gtprice === '-1'
-                                  ? `Duoi ${item.ltprice}`
+                                  ? `Dưới ${convertNumber(item.ltprice)}`
                                   : item.gtprice !== '-1' &&
                                     item.ltprice !== '-1'
-                                  ? `${item.gtprice} - ${item.ltprice}`
-                                  : `Tren ${item.gtprice}`}
+                                  ? `${convertNumber(
+                                        item.gtprice,
+                                    )} - ${convertNumber(item.ltprice)}`
+                                  : `Trên ${convertNumber(item.gtprice)}`}
                           </span>
                       )
                   })
@@ -70,38 +77,22 @@ const PriceRangeList = ({
                                       ? findInRange(item.gtprice, item.ltprice)
                                       : findInRange('', item.gtprice)
                               }}
-                              className="bg-gray hover:font-bold cursor-pointer rounded-[0.4rem] px-[0.8rem] py-[0.6rem] mb-[0.8rem]"
+                              className="stretch-content items-center flex-wrap h-[3.2rem] bg-gray hover:font-bold cursor-pointer rounded-[0.4rem] px-[0.8rem] mb-[0.8rem]"
                           >
                               {item.gtprice === '-1'
-                                  ? `Duoi ${item.ltprice}`
+                                  ? `Dưới ${convertNumber(item.ltprice)}`
                                   : item.gtprice !== '-1' &&
                                     item.ltprice !== '-1'
-                                  ? `${item.gtprice} - ${item.ltprice}`
-                                  : `Tren ${item.gtprice}`}
+                                  ? `${convertNumber(
+                                        item.gtprice,
+                                    )} - ${convertNumber(item.ltprice)}`
+                                  : `Trên ${convertNumber(item.gtprice)}`}
                           </span>
                       )
                   })}
-            <Button
-                onClick={hanldeClick}
-                sx={{
-                    alignSelf: 'center',
-                    width: 'fit-content',
-                    fontWeight: 700,
-                    fontSize: 12,
-                    color: 'black',
-                    '&:hover': { backgroundColor: '#f2f3f4' },
-                }}
-            >
-                {!open ? (
-                    <span>
-                        <AddIcon /> Xem them
-                    </span>
-                ) : (
-                    <span>
-                        <RemoveIcon /> Thu gon
-                    </span>
-                )}
-            </Button>
+            <div className="mt-[-0.4rem]">
+                <ExpandMoreOrLess isOpen={open} onClick={hanldeClick} />
+            </div>
         </div>
     )
 }

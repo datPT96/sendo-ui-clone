@@ -43,11 +43,13 @@ const Locations = () => {
     }, [checkedItem])
 
     return (
-        <div className="flex flex-col w-full px-[0.4rem] py-[1.2rem] text-base">
-            <div className="flex items-center justify-between text-base font-bold ">
-                <span className="ml-[1.2rem]">Địa điểm</span>
+        <div className="stretch-content flex-col flex-wrap px-[0.4rem] py-[1.2rem]">
+            <div className="stretch-content items-center justify-between">
+                <span className="ml-[1.2rem] tracking-[0] text-base font-bold leading-[1.8rem]">
+                    Địa điểm
+                </span>
                 <button
-                    className="p-[0.7rem] hover:bg-gray rounded-[0.4rem]"
+                    className="button-main button-base button-content p-[0.7rem] hover:bg-gray"
                     onClick={() => handleClick()}
                 >
                     <svg
@@ -56,7 +58,7 @@ const Locations = () => {
                         viewBox="0 0 24 24"
                         xmlns="http://www.w3.org/2000/svg"
                         version="1.1"
-                        className={`w-[1.6rem] ${open ? '' : 'rotate-180'}`}
+                        className={`expand-icon ${open ? '' : 'rotate-180'}`}
                     >
                         <path
                             fill="#6F787E"
@@ -67,7 +69,6 @@ const Locations = () => {
                 </button>
             </div>
             {open && <SideBarSelect datas={locations} onClick={handleCheck} />}
-            <hr></hr>
         </div>
     )
 }

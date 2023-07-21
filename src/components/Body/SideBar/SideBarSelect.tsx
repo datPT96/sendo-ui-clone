@@ -9,31 +9,52 @@ import {
 import { red } from '@mui/material/colors'
 // import { styled } from '@mui/material/styles'
 import React, { useState, ChangeEvent } from 'react'
+import ExpandMoreOrLess from './ExpandMoreOrLess'
 
 interface SideBarSelectType {
     datas: Locations[] | ShippingMethod[] | Discounts[] | otherFilter[]
     onClick: (e: ChangeEvent<HTMLInputElement>) => void
 }
 
-// const BoxIcon = styled('span')(({ theme }) => ({
-//     borderRadius: 3,
-//     width: 16,
-//     height: 16,
-//     boxShadow: 'inset 0 0 0 2px #6f787e, inset 0 -1px 0 #6f787e',
-// }))
-// const CheckedIcon = styled(BoxIcon)({
-//     backgroundColor: '#ee2624',
-//     '&:before': {
-//         display: 'block',
-//         width: 16,
-//         height: 16,
-//         backgroundImage:
-//             "url(\"data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath" +
-//             " fill-rule='evenodd' clip-rule='evenodd' d='M12 5c-.28 0-.53.11-.71.29L7 9.59l-2.29-2.3a1.003 " +
-//             "1.003 0 00-1.42 1.42l3 3c.18.18.43.29.71.29s.53-.11.71-.29l5-5A1.003 1.003 0 0012 5z' fill='%23fff'/%3E%3C/svg%3E\")",
-//         content: '""',
-//     },
-// })
+const IconBox = () => {
+    return (
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            version="1.1"
+            xmlnsXlink="http://www.w3.org/1999/xlink"
+            className="d7ed-SwZDZ2 d7ed-ong_OF"
+        >
+            <path
+                d="M18.545 4C19.35 4 20 4.796 20 5.778v12.444c0 .982-.651 1.778-1.455 1.778H5.455C4.65 20 4 19.204 4 18.222V5.778C4 4.796 4.651 4 5.455 4h13.09zM18 6H6v12h12V6z"
+                fill="#6F787E"
+                fill-rule="nonzero"
+            ></path>
+        </svg>
+    )
+}
+
+const IconChecked = () => {
+    return (
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            version="1.1"
+            xmlnsXlink="http://www.w3.org/1999/xlink"
+            className=""
+        >
+            <path
+                d="M18.545 4C19.35 4 20 4.796 20 5.778v12.444c0 .982-.651 1.778-1.455 1.778H5.455C4.65 20 4 19.204 4 18.222V5.778C4 4.796 4.651 4 5.455 4h13.09zM16 8l-5.293 5.293L8.414 11 7 12.414l3.707 3.707 6.707-6.707L16 8z"
+                fill="#EE2624"
+                fill-rule="nonzero"
+            ></path>
+        </svg>
+    )
+}
 
 const SideBarSelect = ({ datas, onClick }: SideBarSelectType) => {
     const [open, setOpen] = useState(false)
@@ -44,120 +65,126 @@ const SideBarSelect = ({ datas, onClick }: SideBarSelectType) => {
     }
 
     return (
-        <FormGroup>
-            {!open
-                ? datas.map((item: any, index) => {
-                      if (index > 3) {
-                          return null
-                      }
-                      return (
-                          <FormControlLabel
-                              key={index}
-                              control={
-                                  <Checkbox
-                                      value={item?.search_key}
-                                      sx={{
-                                          '&.MuiButtonBase-root': {
-                                              padding: 0,
-                                          },
-                                          '& .MuiSvgIcon-root': {
-                                              fontSize: 22,
-                                          },
-                                          color: '#6f787e',
-                                          '&.Mui-checked': {
-                                              color: red[600],
-                                          },
-                                      }}
-                                      disableRipple
-                                      onChange={onCheck}
-                                  />
-                              }
-                              label={
-                                  <Typography
-                                      variant="caption"
-                                      fontSize={14}
-                                      noWrap={true}
-                                      align="center"
-                                  >
-                                      {item.option_name}
-                                  </Typography>
-                              }
-                              sx={{
-                                  '&.MuiFormControlLabel-root': {
-                                      width: '100%',
-                                      marginLeft: 0.8,
-                                      marginRight: 0,
-                                      borderRadius: 0.8,
-                                      padding: '4px 8px',
-                                  },
-                                  '&:hover': {
-                                      backgroundColor: '#f2f3f4',
-                                      fontWeight: 'bold',
-                                  },
-                              }}
-                          />
-                      )
-                  })
-                : datas.map((item: any, index) => {
-                      return (
-                          <FormControlLabel
-                              key={index}
-                              control={
-                                  <Checkbox
-                                      value={item?.search_key}
-                                      sx={{
-                                          '&.MuiButtonBase-root': {
-                                              padding: 0,
-                                          },
-                                          '& .MuiSvgIcon-root': {
-                                              fontSize: 22,
-                                          },
-                                          color: '#6f787e',
-                                          '&.Mui-checked': {
-                                              color: red[600],
-                                          },
-                                      }}
-                                      disableRipple
-                                      onChange={onCheck}
-                                  />
-                              }
-                              label={
-                                  <Typography
-                                      variant="caption"
-                                      fontSize={14}
-                                      noWrap={true}
-                                      align="center"
-                                  >
-                                      {item.option_name}
-                                  </Typography>
-                              }
-                              sx={{
-                                  '&.MuiFormControlLabel-root': {
-                                      width: '100%',
-                                      marginLeft: 0.8,
-                                      marginRight: 0,
-                                      borderRadius: 0.8,
-                                      padding: '4px 8px',
-                                  },
-                                  '&:hover': {
-                                      backgroundColor: '#f2f3f4',
-                                      fontWeight: 'bold',
-                                  },
-                              }}
-                          />
-                      )
-                  })}
-            {datas.length > 4 && (
-                <button
-                    onClick={handleClick}
-                    className="flex items-center justify-center "
-                >
-                    <span className="hover:bg-gray font-bold px-[0.8rem] py-[0.4rem]">
-                        {!open ? '+ Xem them' : '- Thu gon'}
-                    </span>
-                </button>
-            )}
-        </FormGroup>
+        <div className="w-full mt-[0.8rem]">
+            <FormGroup className="stretch-content">
+                {!open
+                    ? datas.map((item: any, index) => {
+                          if (index > 3) {
+                              return null
+                          }
+                          return (
+                              <FormControlLabel
+                                  key={index}
+                                  control={
+                                      <Checkbox
+                                          value={item?.search_key}
+                                          icon={<IconBox />}
+                                          checkedIcon={<IconChecked />}
+                                          sx={{
+                                              '&.MuiButtonBase-root': {
+                                                  padding: 0,
+                                              },
+                                              '& .MuiSvgIcon-root': {
+                                                  fontSize: '24px',
+                                              },
+                                              color: '#6f787e',
+                                              '&.Mui-checked': {
+                                                  color: red[600],
+                                              },
+                                          }}
+                                          disableRipple
+                                          onChange={onCheck}
+                                      />
+                                  }
+                                  label={
+                                      <Typography
+                                          variant="caption"
+                                          fontSize={14}
+                                          noWrap={true}
+                                          align="center"
+                                          letterSpacing={0}
+                                          lineHeight={'1.8rem'}
+                                          sx={{
+                                              marginLeft: '0.8rem',
+                                              '&:hover': {
+                                                  fontWeight: '700',
+                                              },
+                                          }}
+                                      >
+                                          {item.option_name}
+                                      </Typography>
+                                  }
+                                  className="stretch-content select-btn"
+                                  sx={{
+                                      '&.MuiFormControlLabel-root': {
+                                          margin: 0,
+                                      },
+                                      '&:hover': {
+                                          backgroundColor: '#f2f3f4',
+                                          fontWeight: 'bold',
+                                      },
+                                  }}
+                              />
+                          )
+                      })
+                    : datas.map((item: any, index) => {
+                          return (
+                              <FormControlLabel
+                                  key={index}
+                                  control={
+                                      <Checkbox
+                                          value={item?.search_key}
+                                          sx={{
+                                              '&.MuiButtonBase-root': {
+                                                  padding: 0,
+                                              },
+                                              '& .MuiSvgIcon-root': {
+                                                  '& path': {
+                                                      d: 'path("M18.545 4C19.35 4 20 4.796 20 5.778v12.444c0 .982-.651 1.778-1.455 1.778H5.455C4.65 20 4 19.204 4 18.222V5.778C4 4.796 4.651 4 5.455 4h13.09zM18 6H6v12h12V6z")',
+                                                  },
+                                                  fontSize: 24,
+                                              },
+                                              color: '#6f787e',
+                                              '&.Mui-checked': {
+                                                  color: red[600],
+                                              },
+                                          }}
+                                          disableRipple
+                                          onChange={onCheck}
+                                      />
+                                  }
+                                  label={
+                                      <Typography
+                                          variant="caption"
+                                          fontSize={14}
+                                          noWrap={true}
+                                          align="center"
+                                          sx={{
+                                              marginLeft: '0.8rem',
+                                          }}
+                                      >
+                                          {item.option_name}
+                                      </Typography>
+                                  }
+                                  className="stretch-content select-btn"
+                                  sx={{
+                                      '&.MuiFormControlLabel-root': {
+                                          display: 'flex',
+                                          margin: 0,
+                                      },
+                                      '&:hover': {
+                                          backgroundColor: '#f2f3f4',
+                                          fontWeight: 'bold',
+                                      },
+                                  }}
+                              />
+                          )
+                      })}
+                {datas.length > 4 && (
+                    <ExpandMoreOrLess isOpen={open} onClick={handleClick} />
+                )}
+            </FormGroup>
+        </div>
     )
 }
 
